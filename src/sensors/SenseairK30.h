@@ -101,7 +101,7 @@
 #define SRC_SENSORS_SENSEAIRK30_H_
 
 // Debugging Statement
-define MS_SENSEAIRK30_DEBUG
+#define MS_SENSEAIRK30_DEBUG
 #ifdef MS_SENSEAIRK30_DEBUG
 #define MS_DEBUGGING_STD "SenseairK30"
 #endif
@@ -162,18 +162,18 @@ define MS_SENSEAIRK30_DEBUG
 #define K30_UNIT_NAME "Part per Million"
 /// @brief Default variable short code; "SonarRange"
 #define K30_DEFAULT_CODE "CO2"
-    /**@}*/
+/**@}*/
 
 
-    /* clang-format off */
+/* clang-format off */
 /**
  * @brief The Sensor sub-class for the
  * [MaxBotix ultrasonic range finders](@ref sensor_maxbotix).
  *
  * @ingroup sensor_maxbotix
  */
-    /* clang-format on */
-    class SenseairK30 : public Sensor {
+/* clang-format on */
+class SenseairK30 : public Sensor {
  public:
     /**
      * @brief Construct a new Senseair K30 object
