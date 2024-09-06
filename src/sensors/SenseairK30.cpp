@@ -10,6 +10,9 @@
 
 #include "SenseairK30.h"
 
+uint8_t read_CO2[]     = {0xFE, 0X44, 0X00, 0X08, 0X02, 0X9F, 0X25};
+int     responseLength = 7;
+float   valMultiplier  = 10;
 
 SenseairK30::SenseairK30(Stream* stream, int8_t powerPin, int8_t triggerPin,
                          uint8_t measurementsToAverage)
@@ -96,12 +99,8 @@ bool SenseairK30::wake(void) {
 
 bool SenseairK30::addSingleMeasurementResult(void) {
     // Initialize values
-    bool    success        = false;
-    int16_t result         = -9999;
-    uint8_t read_CO2[]     = {0xFE, 0X44, 0X00, 0X08, 0X02, 0X9F, 0X25};
-    int     responseLength = 7;
-    float   valMultiplier  = 10;
-
+    bool    success = false;
+    int16_t result  = -9999;
     /**
         // Clear anything out of the stream buffer
         auto junkChars = static_cast<uint8_t>(_stream->available());
@@ -142,7 +141,7 @@ bool SenseairK30::addSingleMeasurementResult(void) {
         }*/
         int timeout = 0;
         while (!_stream->available()) {
-            _stream->write(readCO2, responseLength);
+            _stream->write(read_CO2, responseLength);
             timeout++;
             delay(50);
             if (timeout > 50) { break; }
