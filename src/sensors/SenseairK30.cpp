@@ -140,11 +140,11 @@ bool SenseairK30::addSingleMeasurementResult(void) {
             digitalWrite(_triggerPin, LOW);
         }*/
         int timeout = 0;
-        MS_DBG(F("Starting read from K30..."))
+        MS_DBG(F("Starting read from K30..."));
         while (!_stream->available()) {
             _stream->write(read_CO2, responseLength);
             timeout++;
-            MS_DBG(F("timeout="), timeout)
+            MS_DBG(F("timeout="), timeout);
             delay(50);
             if (timeout > 50) { break; }
         }
@@ -160,9 +160,9 @@ bool SenseairK30::addSingleMeasurementResult(void) {
             delay(50);
         }
         delay(100);
-        MS_DBG(F("Looking for response..."))
+        MS_DBG(F("Looking for response..."));
         if (_stream->available() >= responseLength) {
-                        uint8_t packet[responseLength];
+            uint8_t packet[responseLength];
             _stream->readBytes(packet, responseLength);
 
             // Calculate value
@@ -173,7 +173,7 @@ bool SenseairK30::addSingleMeasurementResult(void) {
             //_stream->read();  // To throw away the carriage return
             MS_DBG(F("  CO2:"), result);
         } else {
-            MS_DBG(F("Got response of wrong length!"))
+            MS_DBG(F("Got response of wrong length!"));
             result = -9999;
         }
         rangeAttempts++;
