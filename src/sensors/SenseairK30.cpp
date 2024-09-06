@@ -10,8 +10,9 @@
 
 #include "SenseairK30.h"
 
-byte  read_CO2[]    = {0xFE, 0X44, 0X00, 0X08, 0X02, 0X9F, 0X25};
-float valMultiplier = 10;
+uint8_t read_CO2[]     = {0xFE, 0X44, 0X00, 0X08, 0X02, 0X9F, 0X25};
+int     responseLength = 7;
+float   valMultiplier  = 10;
 
 SenseairK30::SenseairK30(Stream* stream, int8_t powerPin, int8_t triggerPin,
                          uint8_t measurementsToAverage)
@@ -22,7 +23,7 @@ SenseairK30::SenseairK30(Stream* stream, int8_t powerPin, int8_t triggerPin,
       _stream(stream) {}
 SenseairK30::SenseairK30(Stream& stream, int8_t powerPin, int8_t triggerPin,
                          uint8_t measurementsToAverage)
-    : Sensor("MaxBotixMaxSonar", K30_NUM_VARIABLES, K30_WARM_UP_TIME_MS,
+    : Sensor("SenseairK30", K30_NUM_VARIABLES, K30_WARM_UP_TIME_MS,
              K30_STABILIZATION_TIME_MS, K30_MEASUREMENT_TIME_MS, powerPin, -1,
              measurementsToAverage, K30_INC_CALC_VARIABLES),
       _triggerPin(triggerPin),
@@ -140,12 +141,14 @@ bool SenseairK30::addSingleMeasurementResult(void) {
         }*/
         int timeout = 0;
         while (!_stream->available()) {
-            _stream->write(readCO2, 7);
+            _stream->write(readCO2, responseLength);
+            timeout++;
             delay(50);
+            if (timeout > 50) { break; }
         }
 
         timeout = 0;
-        while (_stream->available() < 7) {
+        while (_stream->available() < responseLength) {
             timeout++;
             if (timeout > 10) {
                 while (_stream->available()) { _stream->read(); }
@@ -154,9 +157,9 @@ bool SenseairK30::addSingleMeasurementResult(void) {
             }
             delay(50);
         }
-        if (_stream->available() >= 7) {
-            byte packet[7];
-            _stream->readBytes(packet, 7);
+        if (_stream->available() >= responseLength) {
+            uint8_t packet[responseLength];
+            _stream->readBytes(packet, responseLength);
 
             // Calculate value
             int high = packet[3];
@@ -186,19 +189,19 @@ bool SenseairK30::addSingleMeasurementResult(void) {
             MS_DBG(F("  Good result found"));
             success = true;
         }
-        /**}
-    } else {
-        MS_DBG(getSensorNameAndLocation(), F("is not currently measuring!"));
-    }*/
-
-        verifyAndAddMeasurementResult(K30_VAR_NUM, result);
-
-        // Unset the time stamp for the beginning of this measurement
-        _millisMeasurementRequested = 0;
-        // Unset the status bits for a measurement request (bits 5 & 6)
-        //_sensorStatus &= 0b10011111;
-
-        // Return values shows if we got a not-obviously-bad reading
-        return success;
     }
+    /**}
+} else {
+    MS_DBG(getSensorNameAndLocation(), F("is not currently measuring!"));
+}*/
+
+    verifyAndAddMeasurementResult(K30_VAR_NUM, result);
+
+    // Unset the time stamp for the beginning of this measurement
+    _millisMeasurementRequested = 0;
+    // Unset the status bits for a measurement request (bits 5 & 6)
+    //_sensorStatus &= 0b10011111;
+
+    // Return values shows if we got a not-obviously-bad reading
+    return success;
 }
