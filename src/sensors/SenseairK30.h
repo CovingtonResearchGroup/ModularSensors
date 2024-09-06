@@ -267,8 +267,8 @@ class SenseairK30_CO2 : public Variable {
      * @param varCode A short code to help identify the variable in files;
      * optional with a default value of "CO2".
      */
-    explicit SenseairK30_Range(SenseairK30* parentSense, const char* uuid = "",
-                               const char* varCode = K30_DEFAULT_CODE)
+    explicit SenseairK30_CO2(SenseairK30* parentSense, const char* uuid = "",
+                             const char* varCode = K30_DEFAULT_CODE)
         : Variable(parentSense, (const uint8_t)K30_VAR_NUM,
                    (uint8_t)K30_RESOLUTION, K30_VAR_NAME, K30_UNIT_NAME,
                    varCode, uuid) {}
