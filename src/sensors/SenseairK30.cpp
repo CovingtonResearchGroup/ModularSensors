@@ -201,3 +201,4 @@ bool SenseairK30::addSingleMeasurementResult(void) {
         // Return values shows if we got a not-obviously-bad reading
         return success;
     }
+}
