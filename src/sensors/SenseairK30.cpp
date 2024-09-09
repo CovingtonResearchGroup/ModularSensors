@@ -144,10 +144,6 @@ bool SenseairK30::addSingleMeasurementResult(void) {
             success = true;
         }
     }
-    /**}
-} else {
-    MS_DBG(getSensorNameAndLocation(), F("is not currently measuring!"));
-}*/
 
     verifyAndAddMeasurementResult(K30_VAR_NUM, result);
 
