@@ -189,14 +189,18 @@ class SenseairK30 : public Sensor {
      * @param measurementsToAverage The number of measurements to take and
      * average before giving a "final" result from the sensor; optional with a
      * default value of 1.
+     * @param valMultiplier A multipler value for the returned CO2
+     * concentration. Some Senseair sensors provide ppm / 10 and would need a
+     * multiplier of 10. Alternatively, one could use this multiplier to convert
+     * to different units, such as percent. Default is 1.
      */
     SenseairK30(Stream* stream, int8_t powerPin, int8_t triggerPin = -1,
-                uint8_t measurementsToAverage = 1);
+                uint8_t measurementsToAverage = 1, float valMultiplier = 1);
     /**
      * @copydoc SenseairK30::SenseairK30
      */
     SenseairK30(Stream& stream, int8_t powerPin, int8_t triggerPin = -1,
-                uint8_t measurementsToAverage = 1);
+                uint8_t measurementsToAverage = 1, float valMultiplier = 1);
     /**
      * @brief Destroy the SenseairK30 object
      */
@@ -242,6 +246,7 @@ class SenseairK30 : public Sensor {
  private:
     int8_t  _triggerPin;
     Stream* _stream;
+    float   _valMultiplier;
 };
 
 
