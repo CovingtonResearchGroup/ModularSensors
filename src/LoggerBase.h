@@ -16,7 +16,7 @@
 #define SRC_LOGGERBASE_H_
 
 // Debugging Statement
-#define MS_LOGGERBASE_DEBUG
+// #define MS_LOGGERBASE_DEBUG
 
 // Set default clock for SAMD21 as DS3231 instead of built-in RTC
 #define MS_SAMD_DS3231

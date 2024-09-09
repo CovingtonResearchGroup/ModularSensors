@@ -101,7 +101,7 @@
 #define SRC_SENSORS_SENSEAIRK30_H_
 
 // Debugging Statement
-#define MS_SENSEAIRK30_DEBUG
+// #define MS_SENSEAIRK30_DEBUG
 #ifdef MS_SENSEAIRK30_DEBUG
 #define MS_DEBUGGING_STD "SenseairK30"
 #endif
@@ -128,13 +128,13 @@
  */
 /**@{*/
 /// @brief Sensor::_warmUpTime_ms; warm up time to completion of header:  160ms.
-#define K30_WARM_UP_TIME_MS 10000
+#define K30_WARM_UP_TIME_MS 500
 /// @brief Sensor::_stabilizationTime_ms; the HRXL is stable as soon as it warms
 /// up (0ms stabilization).
 #define K30_STABILIZATION_TIME_MS 0
 /// @brief Sensor::_measurementTime_ms; the HRXL takes 166ms to complete a
 /// measurement.
-#define K30_MEASUREMENT_TIME_MS 2500
+#define K30_MEASUREMENT_TIME_MS 500
 /**@}*/
 
 /**

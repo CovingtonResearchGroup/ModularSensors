@@ -25,7 +25,7 @@
 #define SRC_SENSORBASE_H_
 
 // Debugging Statement
-#define MS_SENSORBASE_DEBUG
+// #define MS_SENSORBASE_DEBUG
 
 #ifdef MS_SENSORBASE_DEBUG
 #define MS_DEBUGGING_STD "SensorBase"
