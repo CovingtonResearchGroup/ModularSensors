@@ -141,8 +141,10 @@ bool SenseairK30::addSingleMeasurementResult(void) {
         }*/
         int timeout = 0;
         MS_DBG(F("Starting read from K30..."));
+        int write_size;
         while (!_stream->available()) {
-            _stream->write(read_CO2, responseLength);
+            write_size = _stream->write(read_CO2, responseLength);
+            MS_DBG(F("write size="), write_size);
             timeout++;
             MS_DBG(F("timeout="), timeout);
             delay(50);
@@ -151,6 +153,7 @@ bool SenseairK30::addSingleMeasurementResult(void) {
 
         timeout = 0;
         while (_stream->available() < responseLength) {
+            MS_DBG(F("Stream is available."));
             timeout++;
             if (timeout > 10) {
                 while (_stream->available()) { _stream->read(); }
@@ -163,6 +166,7 @@ bool SenseairK30::addSingleMeasurementResult(void) {
         MS_DBG(F("Looking for response..."));
         if (_stream->available() >= responseLength) {
             uint8_t packet[responseLength];
+            MS_DBG(F("Reading packet..."));
             _stream->readBytes(packet, responseLength);
 
             // Calculate value
@@ -178,14 +182,7 @@ bool SenseairK30::addSingleMeasurementResult(void) {
         }
         rangeAttempts++;
 
-        // If it cannot obtain a result , the sonar is supposed to send a
-        // value just above it's max range.  For 10m models, this is 9999,
-        // for 5m models it's 4999.  The sonar might also send readings of
-        // 300 or 500 (the blanking distance) if there are too many acoustic
-        // echos. If the result becomes garbled or the sonar is
-        // disconnected, the parseInt function returns 0.  Luckily, these
-        // sensors are not capable of reading 0, so we also know the 0 value
-        // is bad.
+
         if (result <= 0) {
             MS_DBG(F("  Bad or Suspicious Result, Retry Attempt #"),
                    rangeAttempts);
