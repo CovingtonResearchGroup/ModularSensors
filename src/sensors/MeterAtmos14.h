@@ -440,5 +440,46 @@ class MeterAtmos14_Pres : public Variable {
     ~MeterAtmos14_Pres() {}
 };
 
+/* clang-format off */
+/**
+ * @brief The Variable sub-class used for the
+ * [Temperature output](@ref sensor_atmos14_temp)
+ * from a [Meter Atmos sensor](@ref sensor_atmos14).
+ *
+ * @ingroup sensor_atmos14
+ */
+/* clang-format on */
+class MeterAtmos14_Temp : public Variable {
+ public:
+    /**
+     * @brief Construct a new MeterAtmos14_Temp object.
+     *
+     * @param parentSense The parent MeterAtmos14 providing the result
+     * values.
+     * @param uuid A universally unique identifier (UUID or GUID) for the
+     * variable; optional with the default value of an empty string.
+     * @param varCode A short code to help identify the variable in files;
+     * optional with a default value of "AirTemp".
+     */
+    explicit MeterAtmos14_Temp(MeterAtmos14* parentSense, const char* uuid = "",
+                               const char* varCode = ATMOS14_TEMP_DEFAULT_CODE)
+        : Variable(parentSense, (const uint8_t)ATMOS14_TEMP_VAR_NUM,
+                   (uint8_t)ATMOS14_TEMP_RESOLUTION, ATMOS14_TEMP_VAR_NAME,
+                   ATMOS14_TEMP_UNIT_NAME, varCode, uuid) {}
+    /**
+     * @brief Construct a new MeterAtmos14_Temp object.
+     *
+     * @note This must be tied with a parent MeterAtmos14 before it can be used.
+     */
+    MeterAtmos14_Temp()
+        : Variable((const uint8_t)ATMOS14_TEMP_VAR_NUM,
+                   (uint8_t)ATMOS14_TEMP_RESOLUTION, ATMOS14_TEMP_VAR_NAME,
+                   ATMOS14_TEMP_UNIT_NAME, ATMOS14_TEMP_DEFAULT_CODE) {}
+    /**
+     * @brief Destroy the MeterAtmos14_Temp object - no action needed.
+     */
+    ~MeterAtmos14_Temp() {}
+};
+
 /**@}*/
 #endif  // SRC_SENSORS_METERATMOS14_H_
