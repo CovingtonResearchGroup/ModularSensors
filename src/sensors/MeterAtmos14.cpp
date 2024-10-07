@@ -114,10 +114,10 @@ bool MeterAtmos14::getResults(void) {
     // Use end() instead of just forceHold to un-set the timers
     if (!wasActive) _SDI12Internal.end();
 
-    MS_DBG(F("Vapor pressure:"), vp);
     MS_DBG(F("Temperature Value:"), temp);
     MS_DBG(F("Relative humidity:"), rh);
     MS_DBG(F("Baro pressure:"), baro);
+    MS_DBG(F("Vapor pressure:"), vp);
 
     // range check on temp; range is - 40°C to + 80°C
     if (temp < -50 || temp > 90) {

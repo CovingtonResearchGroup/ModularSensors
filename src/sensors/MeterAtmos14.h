@@ -229,7 +229,7 @@
  */
 #define ATMOS14_VP_RESOLUTION 3
 /// @brief Sensor variable number; EA is stored in sensorValues[0].
-#define ATMOS14_VP_VAR_NUM 4
+#define ATMOS14_VP_VAR_NUM 3
 /// @brief Variable name in
 /// [ODM2 controlled vocabulary](http://vocabulary.odm2.org/variablename/);
 /// "counter"
