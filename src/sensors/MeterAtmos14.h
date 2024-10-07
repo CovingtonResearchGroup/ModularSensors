@@ -110,7 +110,7 @@
 /**@{*/
 /// @brief Sensor::_warmUpTime_ms; the Atmos 14 warm-up time in SDI-12 mode:
 /// 260
-#define ATMOS14_WARM_UP_TIME_MS 2000
+#define ATMOS14_WARM_UP_TIME_MS 10000
 /// @brief Sensor::_stabilizationTime_ms; the Atmos 14 is stable after 50ms.
 #define ATMOS14_STABILIZATION_TIME_MS 2000
 /// @brief Sensor::_measurementTime_ms; the Atmos 14 takes 50 ms to
@@ -139,7 +139,7 @@
  * of significant figures for averaging - resolution is 0.1°C
  */
 #define ATMOS14_TEMP_RESOLUTION 2
-/// @brief Sensor variable number; temperature is stored in sensorValues[1].
+/// @brief Sensor variable number; temperature is stored in sensorValues[0].
 #define ATMOS14_TEMP_VAR_NUM 0
 /// @brief Variable name in
 /// [ODM2 controlled vocabulary](http://vocabulary.odm2.org/variablename/);

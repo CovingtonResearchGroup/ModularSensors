@@ -125,10 +125,10 @@ bool MeterAtmos14::getResults(void) {
         MS_DBG(F("WARNING:  temperature results out of range (-50-90)!"));
     }
 
-    verifyAndAddMeasurementResult(ATMOS14_VP_VAR_NUM, vp);
     verifyAndAddMeasurementResult(ATMOS14_TEMP_VAR_NUM, temp);
     verifyAndAddMeasurementResult(ATMOS14_RH_VAR_NUM, rh);
     verifyAndAddMeasurementResult(ATMOS14_PRES_VAR_NUM, baro);
+    verifyAndAddMeasurementResult(ATMOS14_VP_VAR_NUM, vp);
 
     return temp != -9999;
 }
