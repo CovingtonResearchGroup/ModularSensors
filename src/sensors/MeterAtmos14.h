@@ -105,16 +105,18 @@
 /**
  * @anchor sensor_atmos14_timing
  * @name Sensor Timing
- * The sensor timing for a Meter Atmos 14
+ * The sensor timing for a Meter Atmos 14. Currently, values are set
+ * conservatively. Initially, the sensor was responding with -9999 for
+ * measurement values. Increasing these times fixed that, but it is unclear
+ * which times needed to be increased and how much.
  */
 /**@{*/
 /// @brief Sensor::_warmUpTime_ms; the Atmos 14 warm-up time in SDI-12 mode:
-/// 260
+/// Conservatively set to 10 seconds
 #define ATMOS14_WARM_UP_TIME_MS 10000
-/// @brief Sensor::_stabilizationTime_ms; the Atmos 14 is stable after 50ms.
+/// @brief Sensor::_stabilizationTime_ms; Conservatively set to 10 secs.
 #define ATMOS14_STABILIZATION_TIME_MS 2000
-/// @brief Sensor::_measurementTime_ms; the Atmos 14 takes 50 ms to
-/// complete a measurement.
+/// @brief Sensor::_measurementTime_ms; Conservatively set to 2 secs.
 #define ATMOS14_MEASUREMENT_TIME_MS 2000
 /// @brief Extra wake time required for an SDI-12 sensor between the "break"
 /// and the time the command is sent.  The Atmos 14 requires no extra time.
