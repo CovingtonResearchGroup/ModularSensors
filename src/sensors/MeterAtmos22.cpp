@@ -112,19 +112,19 @@ bool MeterAtmos22::getResults(void) {
 
     // Wait for the first few characters to arrive. The response from a data
     // request should always have more than three characters
-    uint32_t start = millis();
+    start = millis();
     while (_SDI12Internal.available() < 3 && (millis() - start) < 1500) {
         // wait
     }
     // read the returned address to remove it from the buffer
-    auto returnedAddress = static_cast<char>(_SDI12Internal.read());
+    auto returnedAddress2 = static_cast<char>(_SDI12Internal.read());
     // print out a warning if the address doesn't match up
-    if (returnedAddress != _SDI12address) {
+    if (returnedAddress2 != _SDI12address) {
         MS_DBG(F("Warning, expecting data from"), _SDI12address,
-               F("but got data from"), returnedAddress);
+               F("but got data from"), returnedAddress2);
     }
     // Start printing out the returned data
-    MS_DEEP_DBG(F("    <<<"), returnedAddress);
+    MS_DEEP_DBG(F("    <<<"), returnedAddress2);
 
     // read the '+' out of the buffer, and print it if we're debugging
 #ifdef MS_SDI12SENSORS_DEBUG_DEEP
