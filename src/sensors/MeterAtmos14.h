@@ -110,12 +110,12 @@
 /**@{*/
 /// @brief Sensor::_warmUpTime_ms; the Atmos 14 warm-up time in SDI-12 mode:
 /// 260
-#define ATMOS14_WARM_UP_TIME_MS 2600
+#define ATMOS14_WARM_UP_TIME_MS 2000
 /// @brief Sensor::_stabilizationTime_ms; the Atmos 14 is stable after 50ms.
-#define ATMOS14_STABILIZATION_TIME_MS 500
+#define ATMOS14_STABILIZATION_TIME_MS 1000
 /// @brief Sensor::_measurementTime_ms; the Atmos 14 takes 50 ms to
 /// complete a measurement.
-#define ATMOS14_MEASUREMENT_TIME_MS 50
+#define ATMOS14_MEASUREMENT_TIME_MS 650
 /// @brief Extra wake time required for an SDI-12 sensor between the "break"
 /// and the time the command is sent.  The Atmos 14 requires no extra time.
 #define ATMOS14_EXTRA_WAKE_TIME_MS 0
